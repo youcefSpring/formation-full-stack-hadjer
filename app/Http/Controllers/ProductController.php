@@ -28,9 +28,15 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function search(Request $request)
     {
-        //
+        // return $request->all();
+        $products = Product::where('name', 'LIKE', '%' . $request->search . '%')
+            ->with('category')
+            ->get();
+        $categories = Category::all();
+
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**

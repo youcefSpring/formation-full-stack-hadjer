@@ -19,8 +19,10 @@
         <i class="fas fa-search"></i>
     </button>
 
-    <form action="{{ route('products.index') }}" method="GET" class="search-form" id="searchForm">
+    <form action="{{ route('products.search') }}" method="POST" class="search-form" id="searchForm">
+        @csrf
         <input
+            required
             type="text"
             name="search"
             id="searchInput"
@@ -28,6 +30,9 @@
             value="{{ request('search') }}"
             autocomplete="off"
         >
+        <button type="submit" class="icon-btn" aria-label="Submit Search">
+            <i class="fas fa-save"></i>
+        </button>
     </form>
 </div>
                     <button class="icon-btn cart-btn" aria-label="Cart">

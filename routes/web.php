@@ -12,6 +12,7 @@ Route::view('/','welcome');
 Route::view('/test-view', 'products.index');
 
 Route::get('/products',[ProductController::class,'index'])->name('products.index');
+Route::post('/products/search',[ProductController::class,'search'])->name('products.search');
 
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
