@@ -43,7 +43,7 @@ class CategoryController extends Controller
     {
         $products = Product::where('category_id', $id)->get();
         if($products->isEmpty()){
-            return response()->json(['message' => 'No products found for this category.'], 404);
+            return redirect()->route('categories.index')->with('error', 'No products found for this category.');
         }
         return view('categories.show', compact('products'));
     }

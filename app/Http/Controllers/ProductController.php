@@ -35,8 +35,11 @@ class ProductController extends Controller
             ->with('category')
             ->get();
         $categories = Category::all();
+        if($products->isEmpty()) {
+           return redirect()->back()->with('error', 'No products found for the search term: ' . $request->search);
+        }
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'error'));
     }
 
     /**
