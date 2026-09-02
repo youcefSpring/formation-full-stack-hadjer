@@ -19,10 +19,8 @@
         <i class="fas fa-search"></i>
     </button>
 
-    <form action="{{ route('products.search') }}" method="POST" class="search-form" id="searchForm">
-        @csrf
+    <form action="{{ route('products.search') }}" method="GET" class="search-form" id="searchForm">
         <input
-            required
             type="text"
             name="search"
             id="searchInput"
@@ -30,10 +28,8 @@
             value="{{ request('search') }}"
             autocomplete="off"
         >
-        <button type="submit" class="icon-btn" aria-label="Submit Search">
-            <i class="fas fa-save"></i>
-        </button>
     </form>
+
 </div>
                     <button class="icon-btn cart-btn" aria-label="Cart">
                         <i class="fas fa-shopping-bag"></i>
@@ -45,6 +41,20 @@
                         <span></span>
                     </button>
                 </div>
+                 @if(!auth()->check())
+            <div class="auth-links">
+                <a href="{{ route('show_register_form') }}" class="btn btn-primary">Register</a>
+                <a href="{{ route('show_login_form') }}" class="btn btn-secondary">Login</a>
+            </div>
+        @else
+            <div class="auth-links">
+                <span>Welcome, {{ auth()->user()->name }}</span>
+                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Logout</button>
+                </form>
+            </div>
+        @endif
             </nav>
         </div>
     </header>
