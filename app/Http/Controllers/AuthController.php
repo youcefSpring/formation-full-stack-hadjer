@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -24,7 +25,7 @@ class AuthController extends Controller
         ]);
 
         // Log the user in
-        auth()->login($user);
+        Auth::guard('login')->login($user);
 
         // Redirect to a desired location, e.g., home page
         return redirect()->route('products.index')->with('success', 'Registration successful!');
@@ -39,8 +40,8 @@ class AuthController extends Controller
         ]);
 
         // Attempt to log the user in
-        if (auth()->attempt($credentials)) {
-            // Authentication passed...
+        if (Auth::guard('login')->attempt($credentials)) {
+           
             return redirect()->route('products.index')->with('success', 'Login successful!');
         }
 
@@ -48,5 +49,22 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+
+
+    public function show_login_form()
+    {
+        return view('auth.login');
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('login')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('products.index')->with('success', 'Logged out successfully!');
     }
 }

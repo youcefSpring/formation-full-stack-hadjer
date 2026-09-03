@@ -954,3 +954,153 @@
         box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
 }
+        /* ─────────────── Auth Pages ─────────────── */
+        .auth-section {
+            min-height: calc(100vh - 90px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-section::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 62, 245, 0.25), transparent 70%);
+            top: -200px;
+            right: -150px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .auth-section::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.18), transparent 70%);
+            bottom: -220px;
+            left: -180px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 460px;
+            background: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 44px 40px;
+        }
+
+        .auth-card .auth-head {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-card .auth-head .auth-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            font-size: 1.4rem;
+            color: var(--white);
+        }
+
+        .auth-card .auth-head h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .auth-card .auth-head p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+
+        .auth-form .field {
+            margin-bottom: 20px;
+        }
+
+        .auth-form label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            margin-bottom: 8px;
+        }
+
+        .auth-form .input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 0.98rem;
+            transition: var(--transition);
+        }
+
+        .auth-form .input::placeholder {
+            color: var(--gray);
+        }
+
+        .auth-form .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(108, 62, 245, 0.08);
+            box-shadow: 0 0 0 4px rgba(108, 62, 245, 0.15);
+        }
+
+        .auth-form .input.has-error {
+            border-color: var(--accent);
+        }
+
+        .auth-form .field-error {
+            display: block;
+            margin-top: 7px;
+            font-size: 0.82rem;
+            color: var(--accent);
+        }
+
+        .auth-form .btn-block {
+            width: 100%;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        .auth-alt {
+            margin-top: 26px;
+            text-align: center;
+            font-size: 0.92rem;
+            color: var(--gray);
+        }
+
+        .auth-alt a {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .auth-alt a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 520px) {
+            .auth-card {
+                padding: 34px 24px;
+            }
+        }

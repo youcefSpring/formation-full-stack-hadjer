@@ -41,14 +41,14 @@
                         <span></span>
                     </button>
                 </div>
-                 @if(!auth()->check())
+                 @if(!auth()->guard('login')->check())
             <div class="auth-links">
                 <a href="{{ route('show_register_form') }}" class="btn btn-primary">Register</a>
                 <a href="{{ route('show_login_form') }}" class="btn btn-secondary">Login</a>
             </div>
         @else
             <div class="auth-links">
-                <span>Welcome, {{ auth()->user()->name }}</span>
+                <span>Welcome, {{ auth()->guard('login')->user()->name }}</span>
                  <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="btn btn-secondary">Logout</button>
