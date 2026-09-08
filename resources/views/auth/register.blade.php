@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.auth')
 @section('main-content')
 
 <section class="auth-section">
     <div class="auth-card">
         <div class="auth-head">
-            <div class="auth-icon"><i class="fas fa-user-plus"></i></div>
+            <a href="{{ url('/') }}" class="auth-icon"><i class="fas fa-bolt"></i></a>
             <h1>{{ __('Create your account') }}</h1>
             <p>{{ __('Join Nova and start shopping today') }}</p>
         </div>

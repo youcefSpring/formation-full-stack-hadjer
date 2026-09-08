@@ -41,7 +41,9 @@ class AuthController extends Controller
 
         // Attempt to log the user in
         if (Auth::guard('login')->attempt($credentials)) {
-           
+             if(Auth::guard('login')->user()->user_type === 'admin'){
+                return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
+            }
             return redirect()->route('products.index')->with('success', 'Login successful!');
         }
 
