@@ -1,56 +1,64 @@
 @extends('layouts.main')
+
+@section('title', 'Products')
+
 @section('main-content')
- 
-    <!-- ═══════════ FEATURED PRODUCTS (simplified) ═══════════ -->
-    <section class="featured" id="featured">
-        <div class="container">
-            <div class="section-title">
-                <h2>⭐ Featured <span>Products</span></h2>
-                <p>Handpicked favorites — don't miss out on these bestsellers.</p>
-            </div>
+<section class="page-head">
+    <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="{{ url('/') }}">Home</a> <span>/</span> <span>Products</span>
+        </nav>
+        <h1>Everything on the <span class="marker">shelves</span></h1>
+        <p>
+            @if (request('search'))
+                Results for “{{ request('search') }}” — {{ $products->count() }} {{ Str::plural('item', $products->count()) }}.
+            @else
+                {{ $products->count() }} {{ Str::plural('item', $products->count()) }}, picked and described by hand.
+            @endif
+        </p>
+    </div>
+</section>
 
-            <div class="products-grid">
-                <!-- Card 1 -->
-                 @foreach ($products as $product)
-                <div class="product-card">
-                    <span class="product-emoji">🎧</span>
-                    <div class="product-name">
-                        {{ $product->name }}
-                    </div>
-                    <div class="product-price">${{ number_format($product->price, 2) }}</div>
-                    <button class="btn-add"><i class="fas fa-plus"></i> category : {{ $product->category->name }}</button>
+<section class="featured" id="featured">
+    <div class="container">
+        <div class="products-grid">
+            @forelse ($products as $product)
+                <article class="product-card">
+                    <span class="product-emoji">🎁</span>
+                    <h2 class="product-name">{{ $product->name }}</h2>
+                    <span class="tag {{ $product->status === 'active' ? '' : 'tag-muted' }}">
+                        <i class="fas fa-tag"></i> {{ $product->category?->name ?? 'Uncategorised' }}
+                    </span>
+                    <p class="product-meta">
+                        {{ $product->status === 'active' ? 'In stock' : 'Currently unavailable' }}
+                    </p>
+                    <a class="btn-add" href="{{ route('categories.show', $product->category_id) }}">
+                        <i class="fas fa-arrow-right"></i> More like this
+                    </a>
+                </article>
+            @empty
+                <div class="empty-state" style="grid-column: 1 / -1;">
+                    <span class="emoji">🧺</span>
+                    <p>Nothing here yet. Check back soon — we add things as we find them.</p>
                 </div>
-                @endforeach
-            </div>
+            @endforelse
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ═══════════ CATEGORIES (simplified) ═══════════ -->
-    <section class="categories" id="categories">
-        <div class="container">
-            <div class="section-title">
-                <h2>📂 Shop by <span>Category</span></h2>
-                <p>Find exactly what you need — curated collections.</p>
-            </div>
-
-            <div class="categories-grid">
-                @foreach ($categories as $category)
-                    <div class="category-item">
-                        <a href="{{ route('categories.show', $category->id) }}" class="cat-name">
-                            {{ $category->name }}</a>
-                    </div>
-                @endforeach
-            </div>
+<section class="categories" id="categories">
+    <div class="container">
+        <div class="section-title">
+            <p class="eyebrow">Browse</p>
+            <h2>Shop by <span class="marker">category</span></h2>
+            <p>Small, curated collections rather than endless aisles.</p>
         </div>
-    </section>
 
-            </div>
+        <div class="categories-grid">
+            @foreach ($categories as $category)
+                <a class="category-item" href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+            @endforeach
         </div>
-    </section>
+    </div>
+</section>
 @endsection
-   
-
-  
-
-  
-

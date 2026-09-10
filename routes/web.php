@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
-use App\Http\Controllers\{ProductController,CategoryController,AuthController};
+use App\Http\Controllers\{ProductController,CategoryController,AuthController,PasswordResetController,HomeController};
 
 
 
-Route::view('/','welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::view('/test-view', 'products.index');
 
@@ -31,7 +31,8 @@ Route::get('/login', function () {
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
-
-
-
-
+// Password reset by email (Gmail SMTP)
+Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');

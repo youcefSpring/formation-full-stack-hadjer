@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory; // 2. Use the trait
     protected $table = 'products';
-    protected $fillable = ['name','category_id'];
+    protected $fillable = ['name', 'category_id', 'status'];
 
     public function category()
     {

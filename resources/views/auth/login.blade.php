@@ -28,6 +28,10 @@
                 @enderror
             </div>
 
+            <p class="auth-alt text-end">
+                <a href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
+            </p>
+
             <button type="submit" class="btn btn-primary btn-block">
                 {{ __('Login') }} <i class="fas fa-arrow-right"></i>
             </button>

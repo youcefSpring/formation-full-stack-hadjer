@@ -41,11 +41,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $products = Product::where('category_id', $id)->get();
-        if($products->isEmpty()){
-            return redirect()->route('categories.index')->with('error', 'No products found for this category.');
-        }
-        return view('categories.show', compact('products'));
+        $category = Category::with('children')->findOrFail($id);
+        $products = $category->products()->latest('id')->get();
+
+        return view('categories.show', compact('category', 'products'));
     }
 
     /**
